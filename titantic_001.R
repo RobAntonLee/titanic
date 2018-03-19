@@ -40,6 +40,10 @@ titanic.all[is.na(titanic.all$Fare),"Fare"]<-median.fare
 titanic.all$Pclass<- as.factor (titanic.all$Pclass)
 titanic.all$Sex<- as.factor (titanic.all$Sex)
 titanic.all$Embarked<- as.factor (titanic.all$Embarked)
+titanic.all$Fare <- as.factor (titanic.all$Fare)
+titanic.all$Parch <- as.factor (titanic.all$Parch)
+titanic.all$SibSp <- as.factor (titanic.all$SibSp)
+
 
 # Split data back out after cleaning
 
