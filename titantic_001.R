@@ -15,8 +15,8 @@ titantic.test$IsTrainSet <- FALSE #id column
 
 titantic.test$Survived <- NA #add column for rbind, equalizing columns
 
-ncol(titantic.train) #test procedure
-ncol(titantic.test) #test procedure
+ncol(titantic.train) #test count
+ncol(titantic.test) #test count
 
 titanic.all<- rbind (titantic.train, titantic.test) #combine datasets
 
@@ -42,5 +42,6 @@ titanic.all$Sex<- as.factor (titanic.all$Sex)
 titanic.all$Embarked<- as.factor (titanic.all$Embarked)
 
 # Split data back out after cleaning
+
 titantic.train<-titanic.all[titanic.all$IsTrainSet==TRUE,] 
 titantic.test<-titanic.all[titanic.all$IsTrainSet==FALSE,] 
