@@ -40,9 +40,9 @@ titanic.all[is.na(titanic.all$Fare),"Fare"]<-median.fare
 titanic.all$Pclass<- as.factor (titanic.all$Pclass)
 titanic.all$Sex<- as.factor (titanic.all$Sex)
 titanic.all$Embarked<- as.factor (titanic.all$Embarked)
-titanic.all$Fare <- as.factor (titanic.all$Fare)
-titanic.all$Parch <- as.ordered (titanic.all$Parch)
-titanic.all$SibSp <- as.ordered (titanic.all$SibSp)
+#titanic.all$Fare <- as.factor (titanic.all$Fare)
+#titanic.all$Parch <- as.ordered (titanic.all$Parch)
+#titanic.all$SibSp <- as.ordered (titanic.all$SibSp)
 
 
 # Split data back out after cleaning
@@ -52,8 +52,15 @@ titantic.test<-titanic.all[titanic.all$IsTrainSet==FALSE,]
 
 titantic.train$Survived <- as.factor (titantic.train$Survived)
 
+# predictive model
+
 survived.equation <- "Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked"
 survived.formula <- as.formula (survived.equation)
-library (randomForest)
 
-randomForest(Survived~.)
+library (randomForest) #install.packages ("randomForest")
+
+titanic.model <-randomForest(formula= survived.formula, data = titantic.train, ntree =500, mtry=3, nodesize = 0.01*nrow(titantic.test))
+
+features.equation <- "Pclass + Sex + Age + SibSp + Parch + Fare + Embarked"
+
+Survived<-predict (titanic.model, newdata=titantic.test)
