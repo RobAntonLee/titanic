@@ -41,11 +41,19 @@ titanic.all$Pclass<- as.factor (titanic.all$Pclass)
 titanic.all$Sex<- as.factor (titanic.all$Sex)
 titanic.all$Embarked<- as.factor (titanic.all$Embarked)
 titanic.all$Fare <- as.factor (titanic.all$Fare)
-titanic.all$Parch <- as.factor (titanic.all$Parch)
-titanic.all$SibSp <- as.factor (titanic.all$SibSp)
+titanic.all$Parch <- as.ordered (titanic.all$Parch)
+titanic.all$SibSp <- as.ordered (titanic.all$SibSp)
 
 
 # Split data back out after cleaning
 
 titantic.train<-titanic.all[titanic.all$IsTrainSet==TRUE,] 
 titantic.test<-titanic.all[titanic.all$IsTrainSet==FALSE,] 
+
+titantic.train$Survived <- as.factor (titantic.train$Survived)
+
+survived.equation <- "Survived ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked"
+survived.formula <- as.formula (survived.equation)
+library (randomForest)
+
+randomForest(Survived~.)
