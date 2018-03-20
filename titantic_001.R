@@ -1,5 +1,4 @@
 #robleeanalyst@gmail.com
-# training ref https://www.youtube.com/watch?v=Zx2TguRHrJE
 
 #import datasets
 
@@ -69,5 +68,5 @@ PassengerId <- titantic.test$PassengerId
 output.df <- as.data.frame (PassengerId)
 output.df$Survived <- Survived
 
-write.csv (output.df, file = "kaggle_submission.csv")
+write.csv (output.df, file = "kaggle_submission.csv", row.names = FALSE)
 
