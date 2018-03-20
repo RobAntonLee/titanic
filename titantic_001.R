@@ -64,3 +64,10 @@ titanic.model <-randomForest(formula= survived.formula, data = titantic.train, n
 features.equation <- "Pclass + Sex + Age + SibSp + Parch + Fare + Embarked"
 
 Survived<-predict (titanic.model, newdata=titantic.test)
+
+PassengerId <- titantic.test$PassengerId
+output.df <- as.data.frame (PassengerId)
+output.df$Survived <- Survived
+
+write.csv (output.df, file = "kaggle_submission.csv")
+
